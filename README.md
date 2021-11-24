@@ -2,17 +2,25 @@
 
 IgienizzanteAutomatico ha come obiettivo la realizzazione di un distributore automatico di igienizzante per le mani e di un tracker di casi positivi e morti di Coronavirus in Italia.
 
-## Demo - Igienizzante Automatico:
+## Demo 
 
+### Igienizzante Automatico:
+
+<br/>
 <p align="center">
   <img src="IgienizzanteAutomaticoDemo.gif" alt="animated" />
 </p>
+<br/>
+<br/>
 
-## Demo - Covid19 Tracker:
+### Covid19 Tracker:
 
+<br/>
 <p align="center">
   <img src="Covid19TrackerDemo.gif" alt="animated" />
 </p>
+<br/>
+<br/>
 
 ## Built with:
 
