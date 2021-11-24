@@ -21,7 +21,7 @@ IgienizzanteAutomatico ha come obiettivo la realizzazione di un distributore aut
 ## Components
 
 ```
-* ESP32-s
+* ESP32S
 * Sensore a ultrasuoni HC-SR04
 * LCD 16x2
 * Mini pompa dell'acqua DC 3-6V
@@ -33,9 +33,9 @@ IgienizzanteAutomatico ha come obiettivo la realizzazione di un distributore aut
 ## Project
 
 Il sensore a ultrasuoni viene utilizzato per verificare la presenza delle mani. 
-Calcolerà la distanza tra sè stesso e qualsiasi ostacolo(in questo caso le mani) continuamente e avviserà l'ESP32-s di accendere la pompa ogni volta che la distanza sarà inferiore o uguale a 15cm, in modo da far fuoriuscire l'igienizzante automatico.
-La pompa è collegata a ESP32-s tramite il modulo relè.
-In contemporanea ESP32-s, tramite il modulo Wifi 802.11, invocherà una richiesta HTTP GET per leggere il contenuto di un file JSON che contiene i dati sull'andamento del Covid19 in Italia. In particolare vengono estratti i numeri di casi positivi e morti che verranno poi mostrati sul display LCD.
+Calcolerà la distanza tra sè stesso e qualsiasi ostacolo(in questo caso le mani) continuamente e avviserà ESP32S di accendere la pompa ogni volta che la distanza sarà inferiore o uguale a 15cm, in modo da far fuoriuscire l'igienizzante automatico.
+La pompa è collegata a ESP32S tramite il modulo relè.
+In contemporanea ESP32S, tramite il modulo Wifi 802.11, invocherà una richiesta HTTP GET per leggere il contenuto di un file JSON che contiene i dati sull'andamento del Covid19 in Italia. In particolare vengono estratti i numeri di casi positivi e morti che verranno poi mostrati sul display LCD.
 
 ## Circuit Diagram
 
