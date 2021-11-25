@@ -13,7 +13,8 @@ const int echoPin = 18;
 const int pump = 19;
 long duration;
 int distance; 
-const char* url = "https://api.apify.com/v2/key-value-stores/UFpnR8mukiu0TSrb4/records/LATEST?disableRedirect=true";
+//https://api.apify.com/v2/key-value-stores/UFpnR8mukiu0TSrb4/records/LATEST?disableRedirect=true
+const char* url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale-latest.json";
 
 void setup() {
   Serial.begin(115200);
@@ -76,16 +77,15 @@ void loop() {
     StaticJsonDocument<1024> doc;
     deserializeJson(doc, json);
    
-    long root_0_totale_positivi = doc["totalPositive"];
-    long root_0_deceduti = doc["deceased"];
-    Serial.println(root_0_totale_positivi);
+    long root_0_nuovi_positivi = doc[0]["nuovi_positivi"];
+    long root_0_deceduti = doc[0]["deceduti"];
+    Serial.println(root_0_nuovi_positivi);
     Serial.println(root_0_deceduti);
     if (count <= 3){
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("POSITIVI: ");
-      lcd.print(root_0_totale_positivi);
-      //Serial.println(features_0_attributes_Recovered);
+      lcd.print(root_0_nuovi_positivi);
       lcd.setCursor(0, 1);
       lcd.print("MORTI: ");
       lcd.print(root_0_deceduti);
