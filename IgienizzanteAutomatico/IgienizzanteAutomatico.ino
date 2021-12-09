@@ -232,6 +232,9 @@ int checkTempHum(float t, float h) { // 0 --> problema sistema || 1 --> tutto ok
     else if(humidity > 80){
       delayP = 800;
     }
+    else if(humidity < 30){
+      delayP = 1100;
+    }
     else {
       delayP = 1000;
     }
