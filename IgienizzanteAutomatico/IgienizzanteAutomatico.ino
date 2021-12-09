@@ -217,7 +217,7 @@ int checkTempHum(float t, float h) { // 0 --> problema sistema || 1 --> tutto ok
   int temperature = (int) t;
   int humidity = (int) h;
 
-  if((temperature >= 18) && (temperature <= 32) && (humidity > 60)) { // muffa
+  if((temperature >= 18) && (temperature <= 24) && (humidity > 75)) { // muffa
     delayP = 1000;
     return 0;
   }
