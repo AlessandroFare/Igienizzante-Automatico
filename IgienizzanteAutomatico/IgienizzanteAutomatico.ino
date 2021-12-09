@@ -4,6 +4,8 @@
 #include <LiquidCrystal.h>
 #include <WebServer.h>
 #include <DHT.h>
+#include <driver/adc.h>
+#include <esp_wifi.h>
 
 const char* ssid = "*******";
 const char* pass = "*******";
@@ -35,6 +37,12 @@ float Humidity;
 
 long root_0_nuovi_positivi = 0;
 long root_0_deceduti = 0;
+
+// Delay per fuoriuscita igienizzante
+int delayP = 1000;
+
+// Minuti per deep sleep
+#define DEEP_SLEEP_TIME 30
 
 void setup() {
   Serial.begin(115200);
@@ -92,7 +100,7 @@ void ultra(){
   if (distance <= 15){
     Serial.print("Apertura pompa");
     digitalWrite(pump, HIGH);
-    delay(1000);
+    delay(delayP);
     digitalWrite(pump, LOW);
     ESP.restart(); // reboot -> riparte dall'inizio
     }
@@ -105,6 +113,7 @@ void handle_OnConnect() {
  server.send(200, "text/html", SendHTML(Temperature,Humidity, root_0_nuovi_positivi, root_0_deceduti));
  
 }
+
 
 void handle_NotFound() {
   server.send(404, "text/plain", "Not found");
@@ -204,6 +213,49 @@ String SendHTML(float temperature,float humidity, long root_0_nuovi_positivi, lo
  
 }
 
+int checkTempHum(float t, float h) { // 0 --> problema sistema || 1 --> tutto ok (cambia delayP)
+  int temperature = (int) t;
+  int humidity = (int) h;
+
+  if((temperature >= 18) && (temperature <= 32) && (humidity > 60)) { // muffa
+    delayP = 1000;
+    return 0;
+  }
+
+  else { // cambio fuoriuscita igienizzante in base a temperatura e umidità
+    if(temperature > 30) {
+      delayP = 1100;
+    }
+    else if(temperature < 10) {
+      delayP = 800;
+    }
+    else if(humidity > 80){
+      delayP = 800;
+    }
+    else {
+      delayP = 1000;
+    }
+    return 1;
+  }
+}
+
+void goToDeepSleep() {
+  
+  Serial.println("Going to sleep...");
+  WiFi.disconnect(true);
+  WiFi.mode(WIFI_OFF);
+  
+  adc_power_off();
+  esp_wifi_stop();
+
+  // Configura il timer per il risveglio
+  esp_sleep_enable_timer_wakeup(DEEP_SLEEP_TIME * 60L * 1000000L);
+
+  // Va a dormire
+  esp_deep_sleep_start();
+  
+}
+
 void loop() {
 
   // Funzione pompa
@@ -249,6 +301,19 @@ void loop() {
     if (count > 6){
       count = 0;
     }
+
+    int d = checkTempHum(Temperature, Humidity); // cambia delayP
+
+    // Errore
+    if(d == 0) {
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Error");
+      lcd.setCursor(0, 1);
+      lcd.print("Repair System");
+      delay(1000);
+      goToDeepSleep();
+    }
 } 
   else {
     Serial.println("Errore di richiesta HTTP");
@@ -256,4 +321,3 @@ void loop() {
   https.end();
   count++; 
 }
-
