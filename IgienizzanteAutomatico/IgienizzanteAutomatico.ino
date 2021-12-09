@@ -316,6 +316,7 @@ void loop() {
       lcd.print("Repair System");
       delay(1000);
       goToDeepSleep();
+      Serial.flush();
     }
 } 
   else {
