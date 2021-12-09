@@ -39,7 +39,7 @@ long root_0_nuovi_positivi = 0;
 long root_0_deceduti = 0;
 
 // Delay per fuoriuscita igienizzante
-int delayP = 1000;
+int delayP;
 
 // Minuti per deep sleep
 #define DEEP_SLEEP_TIME 30
@@ -81,8 +81,25 @@ void setup() {
   Serial.println("HTTP server started");
 }
 
+void balanceDelayDistance() { // Bilancia la fuoriuscita dell'igienizzante in base alla distanza dal sensore e alle condizioni ambientali
+  int d = checkTempHum(Temperature, Humidity);
+  int delayTemp;
+  if(d == 1) {
+    if((distance <= 15) && (distance >= 10)) {
+      delayTemp = 800;
+      delayP = (delayP + delayTemp)/2; // media
+    }
+    else if(distance < 10) {
+      delayTemp = 1100;
+      delayP = (delayP + delayTemp)/2; // media
+    }
+    else {
+      Serial.println("Nessuna variazione");
+    }
+  }
+}
 void ultra(){
-  
+
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
@@ -99,6 +116,7 @@ void ultra(){
   Serial.println(distance);
   if (distance <= 15){
     Serial.print("Apertura pompa");
+    balanceDelayDistance();
     digitalWrite(pump, HIGH);
     delay(delayP);
     digitalWrite(pump, LOW);
@@ -316,7 +334,6 @@ void loop() {
       lcd.print("Repair System");
       delay(1000);
       goToDeepSleep();
-      Serial.flush();
     }
 } 
   else {
