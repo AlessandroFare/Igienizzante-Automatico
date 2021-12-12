@@ -1,0 +1,89 @@
+<!DOCTYPE html> <html>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Readex+Pro:wght@300&display=swap" rel="stylesheet">
+  <title>Igienizzante Automatico Report</title>
+  <style>
+  html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #333333}
+  body{margin-top: 50px}
+  h1 {margin: 50px auto 30px}
+  .display-div{display: inline-block;vertical-align: middle;position: relative}
+  .humidity-icon{background-color: #c9ccd2;width: 30px;height: 30px;border-radius: 100px;line-height: 36px}
+  .humidity-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left}
+  .humidity{font-weight: 300;font-size: 60px;color: #c9ccd2}
+  .temperature-icon{background-color: #FF6C00;width: 30px;height: 30px;border-radius: 100px;line-height: 40px}
+  .temperature-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left}
+  .temperature{font-weight: 300;font-size: 60px;color: #FF6C00}
+  .superscript{font-size: 17px;font-weight: 600;position: absolute;right: -20px;top: 15px}
+  .data{padding: 10px}
+  </style>
+  <script>
+  setInterval(loadDoc,200)
+  function loadDoc() {
+  var xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+  document.getElementById("webpage").innerHTML =this.responseText}
+  }
+  xhttp.open("GET", "/", true)
+  xhttp.send()
+  }
+  </script>
+  </head>
+  <body>
+  
+  <div id="webpage">
+  
+  <h1>Igienizzante Automatico Report</h1>
+  <div class="data">
+  <div class="display-div temperature-icon">
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  width="9.915px" height="22px" viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+  <path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+  c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+  c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+  c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+  c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z">
+  </svg>
+  </div>
+  <div class="display-div temperature-text">Temperatura</div>
+  <div class="display-div temperature">
+    %TEMPERATURE%
+  <span class="superscript">&degC</span></div>
+  </div>
+  <div class="data">
+  <div class="display-div humidity-icon">
+  <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955" xml:space="preserve">
+  <path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+  c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+  </svg>
+  </div>
+  <div class="display-div humidity-text">Umidità</div>
+  <div class="display-div humidity">
+    %HUMIDITY%
+  <span class="superscript"> &percnt; </span></div>
+  </div>
+  
+  <div class="data">
+  <div class="display-div temperature-icon">
+  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="virus" class="svg-inline--fa fa-virus fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M483.55,227.55H462c-50.68,0-76.07-61.27-40.23-97.11L437,115.19A28.44,28.44,0,0,0,396.8,75L381.56,90.22c-35.84,35.83-97.11,10.45-97.11-40.23V28.44a28.45,28.45,0,0,0-56.9,0V50c0,50.68-61.27,76.06-97.11,40.23L115.2,75A28.44,28.44,0,0,0,75,115.19l15.25,15.25c35.84,35.84,10.45,97.11-40.23,97.11H28.45a28.45,28.45,0,1,0,0,56.89H50c50.68,0,76.07,61.28,40.23,97.12L75,396.8A28.45,28.45,0,0,0,115.2,437l15.24-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-50.68,61.27-76.07,97.11-40.23L396.8,437A28.45,28.45,0,0,0,437,396.8l-15.25-15.24c-35.84-35.84-10.45-97.12,40.23-97.12h21.54a28.45,28.45,0,1,0,0-56.89ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm80,56a24,24,0,1,1,24-24A24,24,0,0,1,304,328Z"></path></svg>
+  </div>
+  <div class="display-div temperature-text">Nuovi Positivi</div>
+  <div class="display-div temperature">
+    %POSITIVI%
+  <span class="superscript"></span></div>
+  </div>
+  
+  
+  <div class="data">
+  <div class="display-div humidity-icon">
+  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="virus" class="svg-inline--fa fa-virus fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M483.55,227.55H462c-50.68,0-76.07-61.27-40.23-97.11L437,115.19A28.44,28.44,0,0,0,396.8,75L381.56,90.22c-35.84,35.83-97.11,10.45-97.11-40.23V28.44a28.45,28.45,0,0,0-56.9,0V50c0,50.68-61.27,76.06-97.11,40.23L115.2,75A28.44,28.44,0,0,0,75,115.19l15.25,15.25c35.84,35.84,10.45,97.11-40.23,97.11H28.45a28.45,28.45,0,1,0,0,56.89H50c50.68,0,76.07,61.28,40.23,97.12L75,396.8A28.45,28.45,0,0,0,115.2,437l15.24-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-50.68,61.27-76.07,97.11-40.23L396.8,437A28.45,28.45,0,0,0,437,396.8l-15.25-15.24c-35.84-35.84-10.45-97.12,40.23-97.12h21.54a28.45,28.45,0,1,0,0-56.89ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm80,56a24,24,0,1,1,24-24A24,24,0,0,1,304,328Z"></path></svg> 
+  </div>
+  <div class="display-div humidity-text">Totali Morti</div>
+  <div class="display-div humidity">
+    %MORTI%
+  <span class="superscript"></span></div>
+  </div>
+
+  </div>
+  </body>
+  </html>
