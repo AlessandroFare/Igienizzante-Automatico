@@ -170,7 +170,7 @@ void printLCD() {
       lcd.print("Wash Hands");
       lcd.setCursor(0, 1);
       lcd.print("Avoid Contacts");
-      delay(2000);
+      delay(1000);
   }
   
   if (count > 6){
