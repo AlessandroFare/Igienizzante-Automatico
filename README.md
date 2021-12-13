@@ -103,12 +103,14 @@ In particolar modo è composto da 6 task, ognuno con tempi di esecuzione differe
 ```
 
 ## Circuit Diagram
+
 <br/>
 <p align="center">
   <img width="650" src="images/Igienizzante Automatico-Circuit Diagram.png">
 </p>
 <br/>
 <br/>
+
 ## Author
 
 * **Alessandro Farè**
