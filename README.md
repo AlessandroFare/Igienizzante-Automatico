@@ -51,7 +51,7 @@ IgienizzanteAutomatico ha come obiettivo la realizzazione di un distributore aut
 ## Project
 
 Il progetto è stato implementato utilizzando la libreria TaskScheduler che permette un approcio cooperative multitasking.\
-In particolar modo è composto da 6 task, ognuno con tempi di esecuzione differenti.\
+In particolar modo è composto da 6 task, ognuno con tempi di esecuzione differenti.
 
 ```
 1. Get Request per numero positivi e morti -> ogni 12 ore
